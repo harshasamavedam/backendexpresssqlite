@@ -1,10 +1,8 @@
-
 const express=require("express")
+const cors=require("cors")
 var mysql = require('mysql');
 const app=express()
-
-
-
+app.use(cors())
 var con = mysql.createConnection({
     host: "localhost",
     user: "root",
@@ -18,14 +16,14 @@ var con = mysql.createConnection({
 
 const data=''
 app.get('/data',(request,response)=>{
-    con.query((`select * from newdata.electronic`),(err,result)=>{
+    con.query((`select * from sakila.actor`),(err,result)=>{
         if (err)
             throw err
-
        response.send(result)
     })
     
 })
-app.listen(500,()=>{
-    console.log("started")
+app.get("/",(req,resp)=>{
+  resp.send("elop")
 })
+app.listen(500)
