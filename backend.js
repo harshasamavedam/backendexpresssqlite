@@ -15,7 +15,7 @@ var con = mysql.createConnection({
   });
 
 const data=''
-app.get('/data',(request,response)=>{
+app.get('/actor',(request,response)=>{
     con.query((`select * from sakila.actor`),(err,result)=>{
         if (err)
             throw err
@@ -24,6 +24,21 @@ app.get('/data',(request,response)=>{
     
 })
 app.get("/",(req,resp)=>{
-  resp.send("elop")
+  resp.send("Home")
+})
+
+app.get("/flim_list",(req,resp)=>{
+  con.query(`select * from sakila.film_list`,(err,result)=>{
+    resp.send(result)
+  })
+})
+
+app.get('/film_category',(req,resp)=>{
+  con.query(`select * from sakila.film_category`,(err,result)=>{
+    if(err){
+      throw err
+    }
+resp.send(result)
+  })
 })
 app.listen(500)
